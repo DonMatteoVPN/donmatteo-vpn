@@ -4,18 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO Meta Tags -->
-    <meta name="description" content="DonMatteo VPN Bot - Быстрый и надежный VPN сервис в Telegram. Безопасное подключение, высокая скорость и доступные цены. Работает на всех устройствах.">
-    <meta name="keywords" content="VPN, Telegram bot, безопасность, приватность, анонимность, DonMatteo VPN, vpn сервис, vpn telegram, купить vpn, недорогой vpn">
+    <meta name="description" content="DonMatteo VPN Bot - Быстрый и безопасный VPN сервис в Telegram. Доступные тарифы от 30₽, высокая скорость до 1 Гбит/с, безлимитный трафик, поддержка всех устройств. Защита данных и конфиденциальность.">
+    <meta name="keywords" content="VPN, Telegram bot, безопасность, приватность, анонимность, DonMatteo VPN, vpn сервис, vpn telegram, купить vpn, недорогой vpn, безлимитный vpn, vpn для telegram, vpn россия, дешевый vpn, быстрый vpn, надежный vpn">
     <meta name="author" content="DonMatteo VPN">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram">
-    <meta property="og:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Доступные цены, высокая скорость, круглосуточная поддержка.">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram | От 30₽">
+    <meta property="og:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽, круглосуточная поддержка.">
     <meta property="og:image" content="https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png">
     <meta property="og:url" content="https://donmatteovpn.github.io/donmatteo-vpn/">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="DonMatteo VPN">
     
-    <title>DonMatteo VPN Bot - Надежный VPN сервис в Telegram | Безопасность и Скорость</title>
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram | От 30₽">
+    <meta name="twitter:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽.">
+    <meta name="twitter:image" content="https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png">
+    
+    <title>DonMatteo VPN Bot - Надежный VPN сервис в Telegram | Безопасность и Скорость от 30₽</title>
     <link rel="canonical" href="https://donmatteovpn.github.io/donmatteo-vpn/">
+    
+    <!-- Дополнительные мета-теги для SEO -->
+    <meta name="geo.region" content="RU">
+    <meta name="geo.position" content="55.7558;37.6173">
+    <meta name="ICBM" content="55.7558, 37.6173">
     
     <!-- Стили и шрифты -->
     <link rel="stylesheet" href="styles.css">
@@ -42,11 +58,21 @@
         "@type": "Product",
         "name": "DonMatteo VPN Bot",
         "description": "Безопасный и быстрый VPN сервис в Telegram",
+        "brand": {
+            "@type": "Brand",
+            "name": "DonMatteo VPN"
+        },
         "offers": {
             "@type": "AggregateOffer",
             "lowPrice": "30",
-            "highPrice": "449",
-            "priceCurrency": "RUB"
+            "highPrice": "3999",
+            "priceCurrency": "RUB",
+            "offerCount": "20"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "150"
         }
     }
     </script>
@@ -61,6 +87,9 @@
                 <div class="logo animate__animated animate__fadeIn">
                     <img src="images/Logo.png" alt="DonMatteo VPN" class="logo-image">
                 </div>
+                <button class="menu-toggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <ul class="nav-links animate__animated animate__fadeIn">
                     <li><a href="#features">Возможности</a></li>
                     <li><a href="#pricing">Тарифы</a></li>
@@ -718,5 +747,33 @@
 
     <!-- Скрипты -->
     <script src="script.js"></script>
+
+    <!-- Мобильное меню -->
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Закрытие мобильного меню при клике по ссылке
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.add('fa-bars');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+            });
+        });
+
+        // Отслеживание кликов по кнопкам для Google Analytics
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                gtag('event', 'click', {
+                    'event_category': 'CTA',
+                    'event_label': this.textContent
+                });
+            });
+        });
+    </script>
 </body>
 </html> 

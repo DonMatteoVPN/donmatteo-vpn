@@ -143,4 +143,76 @@ document.querySelectorAll('.cta-button').forEach(button => {
             });
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Управление раскрытием/закрытием тарифов
+    const tariffCategories = document.querySelectorAll('.tariff-category');
+    
+    tariffCategories.forEach(category => {
+        category.addEventListener('click', function() {
+            const grid = this.nextElementSibling;
+            const isExpanded = this.classList.contains('active');
+            
+            // Закрываем все остальные тарифы
+            document.querySelectorAll('.tariff-category').forEach(cat => {
+                if (cat !== this) {
+                    cat.classList.remove('active');
+                    if (cat.nextElementSibling) {
+                        cat.nextElementSibling.classList.remove('active');
+                        cat.nextElementSibling.style.maxHeight = '0';
+                    }
+                }
+            });
+            
+            // Переключаем текущий тариф
+            this.classList.toggle('active');
+            grid.classList.toggle('active');
+            
+            if (!isExpanded) {
+                grid.style.maxHeight = grid.scrollHeight + 'px';
+                // Плавно скроллим к началу категории
+                const yOffset = -80; // Учитываем высоту шапки
+                const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            } else {
+                grid.style.maxHeight = '0';
+            }
+        });
+    });
+
+    // Оптимизированная функция анимации при скролле
+    const animatedElements = document.querySelectorAll('.feature-card, .price-card, .step, .faq-item');
+    let animationFrameId = null;
+    
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top <= windowHeight * 0.85; // Элемент появляется когда достигает 85% высоты экрана
+    }
+
+    function handleScrollAnimations() {
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+
+        animationFrameId = requestAnimationFrame(() => {
+            animatedElements.forEach(element => {
+                if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                    element.style.opacity = '1';
+                }
+            });
+        });
+    }
+
+    // Инициализация первой категории как открытой
+    const firstCategory = document.querySelector('.tariff-category');
+    if (firstCategory) {
+        firstCategory.click();
+    }
+
+    window.addEventListener('scroll', handleScrollAnimations, { passive: true });
+    window.addEventListener('resize', handleScrollAnimations, { passive: true });
+    handleScrollAnimations();
 }); 
