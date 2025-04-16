@@ -1,44 +1,46 @@
 // Функция для проверки видимости элемента
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top <= windowHeight * 0.85;
 }
 
 // Функция для управления раскрывающимися тарифами
 function initTariffAccordion() {
     const categories = document.querySelectorAll('.tariff-category');
     
-    // При загрузке показываем первую категорию
-    const firstCategory = categories[0];
-    const firstGrid = firstCategory.nextElementSibling;
-    firstCategory.classList.add('active');
-    firstGrid.classList.add('active');
-
     categories.forEach(category => {
-        category.addEventListener('click', () => {
-            const grid = category.nextElementSibling;
+        category.addEventListener('click', function() {
+            const grid = this.nextElementSibling;
+            const isExpanded = this.classList.contains('active');
             
-            // Если категория уже активна, ничего не делаем
-            if (category.classList.contains('active')) {
+            // Если категория активна, закрываем её
+            if (isExpanded) {
+                this.classList.remove('active');
+                grid.classList.remove('active');
+                grid.style.maxHeight = '0';
                 return;
             }
 
             // Закрываем все остальные категории
             categories.forEach(otherCategory => {
-                if (otherCategory !== category) {
+                if (otherCategory !== this) {
                     otherCategory.classList.remove('active');
-                    otherCategory.nextElementSibling.classList.remove('active');
+                    const otherGrid = otherCategory.nextElementSibling;
+                    otherGrid.classList.remove('active');
+                    otherGrid.style.maxHeight = '0';
                 }
             });
 
             // Открываем выбранную категорию
-            category.classList.add('active');
+            this.classList.add('active');
             grid.classList.add('active');
+            grid.style.maxHeight = grid.scrollHeight + 'px';
+
+            // Плавно скроллим к началу категории
+            const yOffset = -80;
+            const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
         });
     });
 }
@@ -50,9 +52,9 @@ function handleScrollAnimations() {
     );
 
     animatedElements.forEach(element => {
-        if (isElementInViewport(element)) {
+        if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
             element.classList.add('animate__animated', 'animate__fadeInUp');
-            element.style.animationDelay = '0.2s';
+            element.style.opacity = '1';
         }
     });
 
@@ -107,6 +109,15 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
+// Оптимизированный обработчик прокрутки
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+        window.cancelAnimationFrame(scrollTimeout);
+    }
+    scrollTimeout = window.requestAnimationFrame(handleScrollAnimations);
+}, { passive: true });
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     initTariffAccordion();
@@ -121,15 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
             heroContent.style.opacity = '1';
         }, 500);
     }
-});
 
-// Оптимизированный обработчик прокрутки
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    if (scrollTimeout) {
-        window.cancelAnimationFrame(scrollTimeout);
+    // Открываем первую категорию по умолчанию
+    const firstCategory = document.querySelector('.tariff-category');
+    if (firstCategory) {
+        firstCategory.click();
     }
-    scrollTimeout = window.requestAnimationFrame(handleScrollAnimations);
 });
 
 // Отслеживание кликов по кнопкам для Google Analytics
@@ -143,76 +151,4 @@ document.querySelectorAll('.cta-button').forEach(button => {
             });
         }
     });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Управление раскрытием/закрытием тарифов
-    const tariffCategories = document.querySelectorAll('.tariff-category');
-    
-    tariffCategories.forEach(category => {
-        category.addEventListener('click', function() {
-            const grid = this.nextElementSibling;
-            const isExpanded = this.classList.contains('active');
-            
-            // Закрываем все остальные тарифы
-            document.querySelectorAll('.tariff-category').forEach(cat => {
-                if (cat !== this) {
-                    cat.classList.remove('active');
-                    if (cat.nextElementSibling) {
-                        cat.nextElementSibling.classList.remove('active');
-                        cat.nextElementSibling.style.maxHeight = '0';
-                    }
-                }
-            });
-            
-            // Переключаем текущий тариф
-            this.classList.toggle('active');
-            grid.classList.toggle('active');
-            
-            if (!isExpanded) {
-                grid.style.maxHeight = grid.scrollHeight + 'px';
-                // Плавно скроллим к началу категории
-                const yOffset = -80; // Учитываем высоту шапки
-                const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({top: y, behavior: 'smooth'});
-            } else {
-                grid.style.maxHeight = '0';
-            }
-        });
-    });
-
-    // Оптимизированная функция анимации при скролле
-    const animatedElements = document.querySelectorAll('.feature-card, .price-card, .step, .faq-item');
-    let animationFrameId = null;
-    
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        return rect.top <= windowHeight * 0.85; // Элемент появляется когда достигает 85% высоты экрана
-    }
-
-    function handleScrollAnimations() {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-        }
-
-        animationFrameId = requestAnimationFrame(() => {
-            animatedElements.forEach(element => {
-                if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
-                    element.classList.add('animate__animated', 'animate__fadeInUp');
-                    element.style.opacity = '1';
-                }
-            });
-        });
-    }
-
-    // Инициализация первой категории как открытой
-    const firstCategory = document.querySelector('.tariff-category');
-    if (firstCategory) {
-        firstCategory.click();
-    }
-
-    window.addEventListener('scroll', handleScrollAnimations, { passive: true });
-    window.addEventListener('resize', handleScrollAnimations, { passive: true });
-    handleScrollAnimations();
 }); 
