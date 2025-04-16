@@ -9,7 +9,7 @@ function isElementInViewport(el) {
     );
 }
 
-// Функция для анимации элементов при прокрутке
+// Улучшенная функция для анимации элементов при прокрутке
 function handleScrollAnimations() {
     const animatedElements = document.querySelectorAll(
         '.feature-card, .price-card, .step, .faq-item'
@@ -17,12 +17,78 @@ function handleScrollAnimations() {
 
     animatedElements.forEach(element => {
         if (isElementInViewport(element)) {
-            element.classList.add('animate__fadeInUp');
+            element.classList.add('animate__animated', 'animate__fadeInUp');
+            element.style.animationDelay = '0.2s';
         }
     });
+
+    // Анимация для баннера при прокрутке
+    const banner = document.querySelector('.banner');
+    if (banner && isElementInViewport(banner)) {
+        banner.classList.add('animate__animated', 'animate__fadeIn');
+        banner.style.animationDuration = '1.5s';
+    }
 }
 
-// Обработчик прокрутки с устранением дребезга
+// Улучшенная плавная прокрутка
+function smoothScroll(target, duration = 1000) {
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    requestAnimationFrame(animation);
+}
+
+// Обновленная обработка навигационных ссылок
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (target) {
+                smoothScroll(target);
+                
+                // Добавляем подсветку активной секции
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            }
+        }
+    });
+});
+
+// Анимация для hero секции при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        setTimeout(() => {
+            heroContent.style.transition = 'opacity 1s ease';
+            heroContent.style.opacity = '1';
+        }, 500);
+    }
+
+    // Инициализация анимаций
+    handleScrollAnimations();
+});
+
+// Оптимизированный обработчик прокрутки
 let scrollTimeout;
 window.addEventListener('scroll', () => {
     if (scrollTimeout) {
@@ -30,18 +96,26 @@ window.addEventListener('scroll', () => {
     }
     scrollTimeout = window.requestAnimationFrame(() => {
         handleScrollAnimations();
-    });
-});
+        
+        // Подсветка активной секции при прокрутке
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - 60) {
+                currentSection = section.getAttribute('id');
+            }
+        });
 
-// Инициализация анимаций при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    handleScrollAnimations();
-    
-    // Анимация для hero секции
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.classList.add('animate__fadeIn');
-    }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    });
 });
 
 // Отслеживание кликов по кнопкам для Google Analytics
@@ -53,23 +127,6 @@ document.querySelectorAll('.cta-button').forEach(button => {
                 'event_category': 'CTA',
                 'event_label': buttonText
             });
-        }
-    });
-});
-
-// Плавная прокрутка для навигационных ссылок
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
         }
     });
 }); 
