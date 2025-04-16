@@ -17,8 +17,8 @@ function initTariffAccordion() {
             // Если категория активна, закрываем её
             if (isExpanded) {
                 this.classList.remove('active');
-                grid.classList.remove('active');
                 grid.style.maxHeight = '0';
+                grid.classList.remove('active');
                 return;
             }
 
@@ -27,8 +27,8 @@ function initTariffAccordion() {
                 if (otherCategory !== this) {
                     otherCategory.classList.remove('active');
                     const otherGrid = otherCategory.nextElementSibling;
-                    otherGrid.classList.remove('active');
                     otherGrid.style.maxHeight = '0';
+                    otherGrid.classList.remove('active');
                 }
             });
 
@@ -136,7 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Открываем первую категорию по умолчанию
     const firstCategory = document.querySelector('.tariff-category');
     if (firstCategory) {
-        firstCategory.click();
+        setTimeout(() => {
+            firstCategory.click();
+        }, 500);
     }
 });
 

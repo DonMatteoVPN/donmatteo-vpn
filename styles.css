@@ -278,10 +278,24 @@ nav .container {
     background: linear-gradient(145deg, var(--card-background), var(--secondary-color));
     padding: 1rem 2rem;
     border-radius: var(--border-radius);
-    margin: 2rem 0 1rem;
+    margin: 2rem 0 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
     user-select: none;
+    position: relative;
+}
+
+.tariff-category::after {
+    content: '▼';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.tariff-category.active::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .tariff-category:hover {
@@ -293,21 +307,27 @@ nav .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin-bottom: 2rem;
-    max-height: 0;
+    margin: 0 0 2rem;
     overflow: hidden;
+    max-height: 0;
     opacity: 0;
-    transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    transform-origin: top;
 }
 
 .pricing-grid.active {
     opacity: 1;
+    margin: 1rem 0 2rem;
 }
 
 .price-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pricing-grid.active .price-card {
