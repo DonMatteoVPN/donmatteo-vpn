@@ -118,8 +118,87 @@ window.addEventListener('scroll', () => {
     scrollTimeout = window.requestAnimationFrame(handleScrollAnimations);
 }, { passive: true });
 
+// Управление навигацией
+function initNavigation() {
+    const header = document.querySelector('header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    let lastScroll = 0;
+
+    // Обработка скролла
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Добавляем класс scrolled при прокрутке
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Мобильное меню
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Закрытие меню при клике на ссылку
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.querySelector('i').classList.add('fa-bars');
+            menuToggle.querySelector('i').classList.remove('fa-times');
+        });
+    });
+
+    // Плавная прокрутка к секциям
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            const headerHeight = header.offsetHeight;
+
+            if (targetSection) {
+                const targetPosition = targetSection.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Подсветка активного пункта меню при скролле
+    function highlightActiveSection() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPosition = window.pageYOffset + header.offsetHeight + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                navLinksItems.forEach(link => link.classList.remove('active'));
+                navLink?.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightActiveSection);
+    highlightActiveSection();
+}
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
+    initNavigation();
     initTariffAccordion();
     handleScrollAnimations();
     
