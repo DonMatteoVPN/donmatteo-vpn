@@ -37,10 +37,11 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
+    padding: 0.5rem 0;
 }
 
 nav {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 nav .container {
@@ -49,10 +50,16 @@ nav .container {
     align-items: center;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo-image {
-    height: 60px;
+    height: 40px;
     width: auto;
     transition: transform 0.3s ease;
+    object-fit: contain;
 }
 
 .logo:hover .logo-image {
@@ -63,6 +70,7 @@ nav .container {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-links a {
@@ -91,14 +99,14 @@ nav .container {
 /* Hero section */
 .hero {
     position: relative;
-    padding: 0;
+    padding-top: 60px;
     background-color: var(--background-color);
     overflow: hidden;
 }
 
 .banner {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 60px);
     position: relative;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
@@ -264,9 +272,29 @@ nav .container {
 }
 
 .tariff-category {
-    font-size: 2rem;
-    color: var(--accent-color);
+    font-size: 1.8rem;
+    color: var(--text-color);
     margin-top: 3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.tariff-category:hover {
+    color: var(--accent-color);
+}
+
+.tariff-category::after {
+    content: '▼';
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.tariff-category.active::after {
+    transform: rotate(180deg);
 }
 
 .pricing-grid {
@@ -274,10 +302,19 @@ nav .container {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    opacity: 0;
+}
+
+.pricing-grid.active {
+    max-height: 2000px;
+    opacity: 1;
 }
 
 .price-card {
-    background: linear-gradient(145deg, var(--card-background), rgba(26, 26, 26, 0.95));
+    background: rgba(26, 26, 26, 0.95);
     padding: 2.5rem;
     border-radius: var(--border-radius);
     text-align: center;
@@ -285,6 +322,7 @@ nav .container {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .price-card::before {
@@ -294,47 +332,37 @@ nav .container {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(139, 0, 0, 0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.05), transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+    background: rgba(26, 26, 26, 0.98);
 }
 
 .price-card:hover::before {
     opacity: 1;
 }
 
-.price-card:hover {
-    transform: translateY(-5px);
-}
-
 .price-card.popular {
-    background: linear-gradient(145deg, var(--card-background), var(--secondary-color));
+    border: 2px solid var(--accent-color);
+    background: rgba(26, 26, 26, 0.98);
     transform: scale(1.05);
-    border: 2px solid var(--accent-color);
 }
 
-.price-card.popular::before {
-    content: 'Популярный';
-    position: absolute;
-    top: 20px;
-    right: -35px;
-    background: var(--accent-color);
-    color: var(--text-color);
-    padding: 5px 40px;
-    transform: rotate(45deg);
-    font-size: 0.8rem;
-    font-weight: bold;
-    z-index: 1;
-}
-
-.price-card.trial {
-    border: 2px solid var(--accent-color);
-    background: linear-gradient(145deg, var(--card-background), var(--secondary-color));
+.price-card.popular:hover {
+    transform: scale(1.07);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
 }
 
 .price-card h3 {
     color: var(--accent-color);
     margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .price {
@@ -342,6 +370,7 @@ nav .container {
     font-weight: 700;
     margin-bottom: 2rem;
     color: var(--text-color);
+    text-shadow: 0 0 10px rgba(139, 0, 0, 0.3);
 }
 
 .price-card ul {
@@ -350,14 +379,85 @@ nav .container {
 }
 
 .price-card li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     color: var(--light-text);
+    transition: color 0.3s ease;
+}
+
+.price-card:hover li {
+    color: var(--text-color);
+}
+
+.description {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+    min-height: 2.7em;
+    transition: color 0.3s ease;
+}
+
+.price-card:hover .description {
+    color: var(--text-color);
 }
 
 .trial-note {
     color: var(--accent-color);
     font-weight: bold;
     margin: 1rem 0;
+    font-size: 1.1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Стили для кнопки в тарифах */
+.price-card .cta-button {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.price-card:hover .cta-button {
+    background: var(--primary-color);
+    border-color: var(--accent-color);
+}
+
+.price-card.popular .cta-button {
+    background: var(--primary-color);
+}
+
+/* Анимация появления тарифов */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pricing-grid.active .price-card {
+    animation: slideDown 0.5s ease forwards;
+}
+
+.pricing-grid.active .price-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.pricing-grid.active .price-card:nth-child(3) {
+    animation-delay: 0.2s;
 }
 
 /* How-to section */
@@ -489,15 +589,37 @@ footer {
     color: var(--accent-color);
 }
 
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
 .social-links a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .social-links a:hover {
     color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.social-links .youtube:hover {
+    color: #FF0000;
+}
+
+.social-links .telegram:hover {
+    color: #0088cc;
+}
+
+.social-icon {
+    font-size: 1.5rem;
 }
 
 .copyright {
@@ -507,8 +629,20 @@ footer {
 
 /* Responsive design */
 @media (max-width: 768px) {
+    .logo-image {
+        height: 32px;
+    }
+    
     .nav-links {
         display: none;
+    }
+    
+    .hero {
+        padding-top: 50px;
+    }
+    
+    .banner {
+        height: calc(70vh - 50px);
     }
     
     .hero h1 {
@@ -528,10 +662,6 @@ footer {
     .footer-links {
         flex-direction: column;
         gap: 1rem;
-    }
-    
-    .banner {
-        height: 70vh;
     }
 }
 

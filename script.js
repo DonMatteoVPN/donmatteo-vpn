@@ -9,6 +9,40 @@ function isElementInViewport(el) {
     );
 }
 
+// Функция для управления раскрывающимися тарифами
+function initTariffAccordion() {
+    const categories = document.querySelectorAll('.tariff-category');
+    
+    // При загрузке показываем первую категорию
+    const firstCategory = categories[0];
+    const firstGrid = firstCategory.nextElementSibling;
+    firstCategory.classList.add('active');
+    firstGrid.classList.add('active');
+
+    categories.forEach(category => {
+        category.addEventListener('click', () => {
+            const grid = category.nextElementSibling;
+            
+            // Если категория уже активна, ничего не делаем
+            if (category.classList.contains('active')) {
+                return;
+            }
+
+            // Закрываем все остальные категории
+            categories.forEach(otherCategory => {
+                if (otherCategory !== category) {
+                    otherCategory.classList.remove('active');
+                    otherCategory.nextElementSibling.classList.remove('active');
+                }
+            });
+
+            // Открываем выбранную категорию
+            category.classList.add('active');
+            grid.classList.add('active');
+        });
+    });
+}
+
 // Улучшенная функция для анимации элементов при прокрутке
 function handleScrollAnimations() {
     const animatedElements = document.querySelectorAll(
@@ -73,8 +107,12 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Анимация для hero секции при загрузке
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
+    initTariffAccordion();
+    handleScrollAnimations();
+    
+    // Анимация для hero секции
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '0';
@@ -83,9 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             heroContent.style.opacity = '1';
         }, 500);
     }
-
-    // Инициализация анимаций
-    handleScrollAnimations();
 });
 
 // Оптимизированный обработчик прокрутки
@@ -94,28 +129,7 @@ window.addEventListener('scroll', () => {
     if (scrollTimeout) {
         window.cancelAnimationFrame(scrollTimeout);
     }
-    scrollTimeout = window.requestAnimationFrame(() => {
-        handleScrollAnimations();
-        
-        // Подсветка активной секции при прокрутке
-        const sections = document.querySelectorAll('section[id]');
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 60) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    });
+    scrollTimeout = window.requestAnimationFrame(handleScrollAnimations);
 });
 
 // Отслеживание кликов по кнопкам для Google Analytics
