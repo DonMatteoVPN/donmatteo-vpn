@@ -3,22 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DonMatteo VPN Bot - Быстрый и надежный VPN сервис в Telegram. Безопасное подключение, высокая скорость и доступные цены.">
-    <meta name="keywords" content="VPN, Telegram bot, безопасность, приватность, анонимность, DonMatteo VPN">
-    <title>DonMatteo VPN Bot - Надежный VPN сервис в Telegram</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="DonMatteo VPN Bot - Быстрый и надежный VPN сервис в Telegram. Безопасное подключение, высокая скорость и доступные цены. Работает на всех устройствах.">
+    <meta name="keywords" content="VPN, Telegram bot, безопасность, приватность, анонимность, DonMatteo VPN, vpn сервис, vpn telegram, купить vpn, недорогой vpn">
+    <meta name="author" content="DonMatteo VPN">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram">
+    <meta property="og:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Доступные цены, высокая скорость, круглосуточная поддержка.">
+    <meta property="og:image" content="https://donmatteo161ru.github.io/donmatteo-vpn/images/Banner.png">
+    <meta property="og:url" content="https://donmatteo161ru.github.io/donmatteo-vpn/">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>DonMatteo VPN Bot - Надежный VPN сервис в Telegram | Безопасность и Скорость</title>
+    <link rel="canonical" href="https://donmatteo161ru.github.io/donmatteo-vpn/">
+    
+    <!-- Стили и шрифты -->
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css для анимаций -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Структурированные данные для SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "DonMatteo VPN Bot",
+        "description": "Безопасный и быстрый VPN сервис в Telegram",
+        "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "30",
+            "highPrice": "449",
+            "priceCurrency": "RUB"
+        }
+    }
+    </script>
 </head>
 <body>
     <header>
         <nav>
             <div class="container">
-                <div class="logo">
+                <div class="logo animate__animated animate__fadeIn">
                     <img src="images/Logo.png" alt="DonMatteo VPN" class="logo-image">
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links animate__animated animate__fadeIn">
                     <li><a href="#features">Возможности</a></li>
                     <li><a href="#pricing">Тарифы</a></li>
                     <li><a href="#how-to">Как использовать</a></li>
@@ -34,9 +74,9 @@
                 <img src="images/Banner.png" alt="DonMatteo VPN Banner" class="banner-image">
             </div>
             <div class="container hero-content">
-                <h1>Безопасный и быстрый VPN в вашем Telegram</h1>
-                <p class="hero-text">Защитите свою приватность и получите доступ к любому контенту с помощью нашего VPN бота</p>
-                <a href="https://t.me/DonMatteo_VPN_bot" class="cta-button">Начать использовать</a>
+                <h1 class="animate__animated animate__fadeInDown">Безопасный и быстрый VPN в вашем Telegram</h1>
+                <p class="hero-text animate__animated animate__fadeInUp">Защитите свою приватность и получите доступ к любому контенту с помощью нашего VPN бота</p>
+                <a href="https://t.me/DonMatteo_VPN_bot" class="cta-button animate__animated animate__pulse animate__infinite">Начать использовать</a>
             </div>
         </section>
 
@@ -227,7 +267,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
+                <div class="footer-logo animate__animated animate__fadeIn">
                     <img src="images/Logo.png" alt="DonMatteo VPN" class="footer-logo-image">
                 </div>
                 <div class="footer-links">
@@ -243,5 +283,43 @@
             <p class="copyright">© 2024 DonMatteo VPN. Все права защищены.</p>
         </div>
     </footer>
+
+    <!-- Скрипт для анимаций при скролле -->
+    <script>
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.feature-card, .price-card, .step, .faq-item');
+            
+            elements.forEach(element => {
+                if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }
+
+        // Отслеживаем скролл для анимаций
+        window.addEventListener('scroll', handleScrollAnimations);
+        // Запускаем проверку при загрузке страницы
+        window.addEventListener('load', handleScrollAnimations);
+
+        // Отслеживание кликов по кнопкам для Google Analytics
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                gtag('event', 'click', {
+                    'event_category': 'CTA',
+                    'event_label': this.textContent
+                });
+            });
+        });
+    </script>
 </body>
 </html> 
