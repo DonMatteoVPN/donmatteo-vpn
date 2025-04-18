@@ -1,3 +1,12 @@
 User-agent: *
 Allow: /
-Sitemap: https://donmatteovpn.github.io/donmatteo-vpn/sitemap.xml 
+Sitemap: https://donmatteovpn.github.io/donmatteo-vpn/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign
+Host: https://donmatteovpn.github.io/donmatteo-vpn/ 
