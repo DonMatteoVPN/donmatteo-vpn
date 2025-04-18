@@ -9,4 +9,4 @@ Crawl-delay: 1
 User-agent: Yandex
 Allow: /
 Clean-param: utm_source&utm_medium&utm_campaign
-Host: donmatteovpn.github.io 
+Host: https://donmatteovpn.github.io/donmatteo-vpn 
