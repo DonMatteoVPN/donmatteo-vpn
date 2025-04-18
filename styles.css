@@ -846,4 +846,34 @@ footer {
     header.scrolled nav {
         padding: 0.5rem 0;
     }
+}
+
+.trial-note {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.crossed-price {
+    text-decoration: line-through;
+    color: #ff0000;
+    font-weight: normal;
+}
+
+@keyframes custom-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.trial-note.animate__pulse {
+    animation-duration: 2s;
 } 
