@@ -39,16 +39,6 @@ function initTariffAccordion() {
             // Используем requestAnimationFrame для плавной анимации
             requestAnimationFrame(() => {
                 grid.style.maxHeight = grid.scrollHeight + 'px';
-                
-                // Плавный скролл с учетом высоты хедера
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const yOffset = -headerHeight - 20;
-                const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                
-                window.scrollTo({
-                    top: y,
-                    behavior: 'smooth'
-                });
             });
         });
     });
@@ -227,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Открываем первую категорию по умолчанию с задержкой
+    // Открываем первую категорию по умолчанию с небольшой задержкой
     const firstCategory = document.querySelector('.tariff-category');
     if (firstCategory) {
         setTimeout(() => {
             firstCategory.click();
-        }, 1000);
+        }, 500);
     }
 });
 
