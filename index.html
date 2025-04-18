@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="DonMatteo VPN Bot - Быстрый и безопасный VPN сервис в Telegram. Доступные тарифы от 30₽, высокая скорость до 1 Гбит/с, безлимитный трафик, поддержка всех устройств. Защита данных и конфиденциальность.">
+    
+    <!-- Primary Meta Tags -->
+    <title>DonMatteo VPN - Быстрый и Безопасный VPN Сервис | От 30₽</title>
+    <meta name="title" content="DonMatteo VPN - Быстрый и Безопасный VPN Сервис | От 30₽">
+    <meta name="description" content="Безопасный и быстрый VPN сервис в Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽. Защита данных и конфиденциальность.">
     <meta name="keywords" content="VPN, Telegram bot, безопасность, приватность, анонимность, DonMatteo VPN, vpn сервис, vpn telegram, купить vpn, недорогой vpn, безлимитный vpn, vpn для telegram, vpn россия, дешевый vpn, быстрый vpn, надежный vpn">
     <meta name="author" content="DonMatteo VPN">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow, max-image-preview:large">
     <meta name="google" content="notranslate">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram | От 30₽">
-    <meta property="og:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽, круглосуточная поддержка.">
-    <meta property="og:image" content="https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png">
     <meta property="og:url" content="https://donmatteovpn.github.io/donmatteo-vpn/">
+    <meta property="og:title" content="DonMatteo VPN - Быстрый и Безопасный VPN Сервис | От 30₽">
+    <meta property="og:description" content="Безопасный и быстрый VPN сервис в Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽. Защита данных и конфиденциальность.">
+    <meta property="og:image" content="https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png">
     <meta property="og:site_name" content="DonMatteo VPN">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DonMatteo VPN Bot - Надежный VPN сервис в Telegram | От 30₽">
-    <meta name="twitter:description" content="Безопасный и быстрый VPN сервис прямо в вашем Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽.">
+    <meta name="twitter:url" content="https://donmatteovpn.github.io/donmatteo-vpn/">
+    <meta name="twitter:title" content="DonMatteo VPN - Быстрый и Безопасный VPN Сервис | От 30₽">
+    <meta name="twitter:description" content="Безопасный и быстрый VPN сервис в Telegram. Скорость до 1 Гбит/с, безлимитный трафик, доступные цены от 30₽. Защита данных и конфиденциальность.">
     <meta name="twitter:image" content="https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png">
     
-    <title>DonMatteo VPN Bot - Надежный VPN сервис в Telegram | Безопасность и Скорость от 30₽</title>
     <link rel="canonical" href="https://donmatteovpn.github.io/donmatteo-vpn/">
     
     <!-- Дополнительные мета-теги для SEO -->
@@ -33,14 +36,23 @@
     <meta name="geo.position" content="55.7558;37.6173">
     <meta name="ICBM" content="55.7558, 37.6173">
     
+    <!-- Preload критических ресурсов -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="images/LogoVPN.jpg" as="image">
+    <link rel="preload" href="images/Banner.png" as="image">
+    
     <!-- Стили и шрифты -->
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Animate.css для анимаций -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -73,36 +85,11 @@
             "@type": "AggregateRating",
             "ratingValue": "4.8",
             "reviewCount": "150"
-        }
+        },
+        "image": "https://donmatteovpn.github.io/donmatteo-vpn/images/Banner.png",
+        "url": "https://donmatteovpn.github.io/donmatteo-vpn/"
     }
     </script>
-
-    <!-- Font Awesome для иконок -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        .logo-image {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            margin-right: 10px;
-        }
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-        }
-        .logo-text {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .footer-logo-image {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -110,7 +97,7 @@
             <div class="container">
                 <div class="logo animate__animated animate__fadeIn">
                     <a href="#" class="logo-link">
-                        <img src="images/LogoVPN.jpg" alt="DonMatteo VPN" class="logo-image">
+                        <img src="images/LogoVPN.jpg" alt="DonMatteo VPN" class="logo-image" width="40" height="40">
                         <span class="logo-text">DonMatteo VPN</span>
                     </a>
                 </div>
@@ -130,7 +117,7 @@
     <main>
         <section class="hero">
             <div class="banner">
-                <img src="images/Banner.png" alt="DonMatteo VPN Banner" class="banner-image">
+                <img src="images/Banner.png" alt="DonMatteo VPN Banner" class="banner-image" width="1920" height="1080" loading="eager">
             </div>
             <div class="container hero-content">
                 <h1 class="animate__animated animate__fadeInDown">Безопасный и быстрый VPN в вашем Telegram</h1>
@@ -144,17 +131,17 @@
                 <h2>Почему выбирают нас</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <img src="images/speed.svg" alt="Высокая скорость" class="feature-icon">
+                        <img src="images/speed.svg" alt="Высокая скорость" class="feature-icon" width="64" height="64" loading="lazy">
                         <h3>Высокая скорость</h3>
                         <p>Оптимизированные серверы обеспечивают максимальную производительность</p>
                     </div>
                     <div class="feature-card">
-                        <img src="images/security.svg" alt="Безопасность" class="feature-icon">
+                        <img src="images/security.svg" alt="Безопасность" class="feature-icon" width="64" height="64" loading="lazy">
                         <h3>Безопасность</h3>
                         <p>Современные протоколы шифрования защищают ваши данные</p>
                     </div>
                     <div class="feature-card">
-                        <img src="images/support.svg" alt="Поддержка" class="feature-icon">
+                        <img src="images/support.svg" alt="Поддержка" class="feature-icon" width="64" height="64" loading="lazy">
                         <h3>24/7 Поддержка</h3>
                         <p>Наша команда всегда готова помочь вам</p>
                     </div>
@@ -637,16 +624,16 @@
                     <div class="step">
                         <div class="step-number">1</div>
                         <h3>Найдите бота</h3>
-                        <p>Перейдите по ссылке @DonMatteo_VPN_bot в Telegram</p>
+                        <p>Откройте Telegram и найдите @DonMatteo_VPN_bot</p>
                     </div>
                     <div class="step">
                         <div class="step-number">2</div>
                         <h3>Выберите тариф</h3>
-                        <p>Выберите подходящий тарифный план</p>
+                        <p>Выберите подходящий вам тариф и оплатите его</p>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
-                        <h3>Подключитесь</h3>
+                        <h3>Настройте VPN</h3>
                         <p>Следуйте инструкциям бота для настройки VPN</p>
                     </div>
                 </div>
@@ -658,16 +645,16 @@
                 <h2>Часто задаваемые вопросы</h2>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <h3>Как оплатить подписку?</h3>
-                        <p>Оплата производится через безопасную систему YooMoney прямо в боте.</p>
+                        <h3>Как работает VPN?</h3>
+                        <p>VPN создает защищенное соединение между вашим устройством и интернетом, шифруя весь трафик и скрывая ваш реальный IP-адрес.</p>
                     </div>
                     <div class="faq-item">
-                        <h3>На каких устройствах работает VPN?</h3>
-                        <p>Наш VPN работает на всех основных платформах: Windows, macOS, iOS, Android.</p>
+                        <h3>Какие устройства поддерживаются?</h3>
+                        <p>Наш VPN работает на всех популярных устройствах: Windows, macOS, iOS, Android, Linux.</p>
                     </div>
                     <div class="faq-item">
-                        <h3>Как получить поддержку?</h3>
-                        <p>Напишите боту команду /support для связи с нашей службой поддержки.</p>
+                        <h3>Какова скорость соединения?</h3>
+                        <p>Мы обеспечиваем скорость до 1 Гбит/с на всех наших серверах.</p>
                     </div>
                 </div>
             </div>
@@ -677,8 +664,8 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo animate__animated animate__fadeIn">
-                    <img src="images/LogoVPN.jpg" alt="DonMatteo VPN" class="footer-logo-image">
+                <div class="footer-logo">
+                    <img src="images/LogoVPN.jpg" alt="DonMatteo VPN" class="footer-logo-image" width="60" height="60" loading="lazy">
                 </div>
                 <div class="footer-links">
                     <a href="#features">Возможности</a>
@@ -687,108 +674,20 @@
                     <a href="#faq">FAQ</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://t.me/DonMatteo_VPN_bot" class="telegram">
+                    <a href="https://t.me/DonMatteo_VPN_bot" class="telegram" aria-label="Telegram">
                         <i class="fab fa-telegram social-icon"></i>
-                        Telegram
                     </a>
-                    <a href="https://youtube.com/@donmatteoru" class="youtube" target="_blank" rel="noopener">
+                    <a href="https://youtube.com/@DonMatteoVPN" class="youtube" aria-label="YouTube">
                         <i class="fab fa-youtube social-icon"></i>
-                        YouTube
                     </a>
                 </div>
             </div>
-            <p class="copyright">© 2024 DonMatteo VPN. Все права защищены.</p>
+            <div class="copyright">
+                <p>&copy; 2024 DonMatteo VPN. Все права защищены.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Скрипт для анимаций при скролле -->
-    <script>
-        // Предотвращаем автоскролл при загрузке
-        if (window.history.scrollRestoration) {
-            window.history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
-
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.feature-card, .price-card, .step, .faq-item');
-            
-            elements.forEach(element => {
-                if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
-                    element.classList.add('animate__animated', 'animate__fadeInUp');
-                }
-            });
-        }
-
-        // Плавный скролл только при клике на ссылки навигации
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return; // Игнорируем ссылки с href="#"
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Отслеживаем скролл для анимаций
-        window.addEventListener('scroll', handleScrollAnimations);
-        // Запускаем проверку при загрузке страницы только для видимых элементов
-        window.addEventListener('load', handleScrollAnimations);
-
-        // Отслеживание кликов по кнопкам для Google Analytics
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                gtag('event', 'click', {
-                    'event_category': 'CTA',
-                    'event_label': this.textContent
-                });
-            });
-        });
-    </script>
-
-    <!-- Скрипты -->
-    <script src="script.js"></script>
-
-    <!-- Мобильное меню -->
-    <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-            this.querySelector('i').classList.toggle('fa-bars');
-            this.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Закрытие мобильного меню при клике по ссылке
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-                document.querySelector('.menu-toggle i').classList.add('fa-bars');
-                document.querySelector('.menu-toggle i').classList.remove('fa-times');
-            });
-        });
-
-        // Отслеживание кликов по кнопкам для Google Analytics
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                gtag('event', 'click', {
-                    'event_category': 'CTA',
-                    'event_label': this.textContent
-                });
-            });
-        });
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html> 

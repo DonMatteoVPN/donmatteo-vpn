@@ -1,8 +1,8 @@
-// Функция для проверки видимости элемента
-function isElementInViewport(el) {
+// Функция для проверки видимости элемента с учетом отступа
+function isElementInViewport(el, offset = 0) {
     const rect = el.getBoundingClientRect();
     const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    return rect.top <= windowHeight * 0.85;
+    return rect.top <= windowHeight * (0.85 + offset);
 }
 
 // Функция для управления раскрывающимися тарифами
@@ -66,7 +66,7 @@ function handleScrollAnimations() {
     }
 }
 
-// Улучшенная плавная прокрутка
+// Улучшенная плавная прокрутка с учетом производительности
 function smoothScroll(target, duration = 1000) {
     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
     const startPosition = window.pageYOffset;
@@ -109,7 +109,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// Оптимизированный обработчик прокрутки
+// Оптимизированный обработчик прокрутки с debounce
 let scrollTimeout;
 window.addEventListener('scroll', () => {
     if (scrollTimeout) {
@@ -126,19 +126,25 @@ function initNavigation() {
     const navLinksItems = document.querySelectorAll('.nav-links a');
     let lastScroll = 0;
 
-    // Обработка скролла
+    // Обработка скролла с debounce
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Добавляем класс scrolled при прокрутке
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
         }
+        scrollTimeout = window.requestAnimationFrame(() => {
+            const currentScroll = window.pageYOffset;
+            
+            // Добавляем класс scrolled при прокрутке
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
 
-        lastScroll = currentScroll;
-    });
+            lastScroll = currentScroll;
+        });
+    }, { passive: true });
 
     // Мобильное меню
     menuToggle.addEventListener('click', () => {
@@ -192,7 +198,7 @@ function initNavigation() {
         });
     }
 
-    window.addEventListener('scroll', highlightActiveSection);
+    window.addEventListener('scroll', highlightActiveSection, { passive: true });
     highlightActiveSection();
 }
 
