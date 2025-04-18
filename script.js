@@ -14,7 +14,7 @@ function initTariffAccordion() {
             const grid = this.nextElementSibling;
             const isExpanded = this.classList.contains('active');
             
-            // Если категория активна, закрываем её
+            // Плавное закрытие текущей категории
             if (isExpanded) {
                 this.classList.remove('active');
                 grid.style.maxHeight = '0';
@@ -22,7 +22,7 @@ function initTariffAccordion() {
                 return;
             }
 
-            // Закрываем все остальные категории
+            // Закрываем все остальные категории с анимацией
             categories.forEach(otherCategory => {
                 if (otherCategory !== this) {
                     otherCategory.classList.remove('active');
@@ -32,15 +32,24 @@ function initTariffAccordion() {
                 }
             });
 
-            // Открываем выбранную категорию
+            // Открываем выбранную категорию с плавной анимацией
             this.classList.add('active');
             grid.classList.add('active');
-            grid.style.maxHeight = grid.scrollHeight + 'px';
-
-            // Плавно скроллим к началу категории
-            const yOffset = -80;
-            const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({top: y, behavior: 'smooth'});
+            
+            // Используем requestAnimationFrame для плавной анимации
+            requestAnimationFrame(() => {
+                grid.style.maxHeight = grid.scrollHeight + 'px';
+                
+                // Плавный скролл с учетом высоты хедера
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const yOffset = -headerHeight - 20;
+                const y = this.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                
+                window.scrollTo({
+                    top: y,
+                    behavior: 'smooth'
+                });
+            });
         });
     });
 }
@@ -52,7 +61,7 @@ function handleScrollAnimations() {
     );
 
     animatedElements.forEach(element => {
-        if (isElementInViewport(element) && !element.classList.contains('animate__animated')) {
+        if (isElementInViewport(element, 0.2) && !element.classList.contains('animate__animated')) {
             element.classList.add('animate__animated', 'animate__fadeInUp');
             element.style.opacity = '1';
         }
@@ -212,18 +221,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '0';
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             heroContent.style.transition = 'opacity 1s ease';
             heroContent.style.opacity = '1';
-        }, 500);
+        });
     }
 
-    // Открываем первую категорию по умолчанию
+    // Открываем первую категорию по умолчанию с задержкой
     const firstCategory = document.querySelector('.tariff-category');
     if (firstCategory) {
         setTimeout(() => {
             firstCategory.click();
-        }, 500);
+        }, 1000);
     }
 });
 
