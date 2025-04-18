@@ -858,8 +858,13 @@ footer {
 
 .crossed-price {
     text-decoration: line-through;
-    color: #ff0000;
-    font-weight: normal;
+    opacity: 0.8;
+}
+
+.price.crossed-price {
+    text-decoration: line-through;
+    color: var(--accent-color);
+    opacity: 0.8;
 }
 
 @keyframes custom-pulse {
