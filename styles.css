@@ -7,9 +7,13 @@
     --text-color: #f8fafc;
     --light-text: #cbd5e1;
     --accent-color: #3b82f6;
-    --border-radius: 12px;
+    --telegram-color: #229ED9;
+    --youtube-color: #FF0000;
+    --border-radius: 16px;
     --container-width: 1200px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -20,7 +24,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-color);
     background-color: var(--background-color);
     overflow-x: hidden;
@@ -29,7 +33,7 @@ body {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 /* Header styles */
@@ -879,4 +883,160 @@ footer {
 
 .trial-note.animate__pulse {
     animation-duration: 2s;
+}
+
+/* Стили для секции сообщества */
+.community {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, var(--background-color), var(--secondary-color));
+}
+
+.community h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(120deg, var(--accent-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.community-card {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.community-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--telegram-color) 0%,
+        var(--accent-color) 50%,
+        var(--youtube-color) 100%
+    );
+    transition: var(--transition);
+    opacity: 0.8;
+}
+
+.community-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow);
+}
+
+.community-card:hover::before {
+    opacity: 1;
+}
+
+.community-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.telegram-group .community-icon {
+    color: var(--telegram-color);
+}
+
+.youtube-channel .community-icon {
+    color: var(--youtube-color);
+}
+
+.community-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.community-description {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.community-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.community-features li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--light-text);
+}
+
+.community-features li i {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+.community-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+.telegram-group .community-button {
+    background-color: var(--telegram-color);
+}
+
+.telegram-group .community-button:hover {
+    background-color: #1a89c1;
+}
+
+.youtube-channel .community-button {
+    background-color: var(--youtube-color);
+}
+
+.youtube-channel .community-button:hover {
+    background-color: #cc0000;
+}
+
+/* Обновленные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .community-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .community-card {
+        padding: 2rem;
+    }
+
+    .community h2 {
+        font-size: 2rem;
+    }
+
+    .community-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .community-features li {
+        font-size: 1rem;
+    }
 } 
