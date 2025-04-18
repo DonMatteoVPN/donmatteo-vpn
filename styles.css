@@ -849,7 +849,7 @@ footer {
 }
 
 .trial-note {
-    color: #ff0000;
+    color: #ff0000 !important;
     font-weight: bold;
     font-size: 1.2em;
     margin: 15px 0;
@@ -861,10 +861,8 @@ footer {
     opacity: 0.8;
 }
 
-.price.crossed-price {
-    text-decoration: line-through;
+.price .crossed-price {
     color: var(--accent-color);
-    opacity: 0.8;
 }
 
 @keyframes custom-pulse {
